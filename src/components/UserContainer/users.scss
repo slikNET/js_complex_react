@@ -1,0 +1,59 @@
+.user{
+    &-wrap{
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    &-posts{
+        margin: 20px;
+        padding: 20px;
+        overflow: auto;
+        max-height: 400px;
+        border: 1px solid #000;
+
+        > p{
+            margin: 0;
+            text-align: center;
+        }
+
+        &-item{
+
+        }
+    }
+
+    &-item{
+        padding: 20px;
+        margin-bottom: 40px;
+        border: 1px solid #11379d;
+        flex: 0 1 calc(50% - 40px);
+    }
+
+    &-address{
+        margin-top: 20px;
+    }
+
+    &-company{
+        margin-top: 20px;
+    }
+
+    &-btm{
+        margin-top: 15px;
+
+        button{
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: none;
+            border-radius: 3px;
+            padding: 10px 20px;
+            border: 1px solid #294ba5;
+            background: #5455b6;
+            color: #fff;
+            transition: background-color .3s ease;
+            &:hover{
+                background: darken(#5455b6, 5%);
+            }
+        }
+    }
+}
