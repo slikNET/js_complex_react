@@ -1,21 +1,24 @@
-import React, {createContext} from 'react';
+import React, {createContext, useState} from 'react';
 
 import './App.scss';
 
 import Child1 from "./components/Child1/Child1";
 import Child2 from "./components/Child2/Child2";
 
-export const DATASubChild2_2 = createContext(null);
+export const DATA = createContext(null);
 
 const App = () => {
+
+    const [someData, setSomeData] = useState('');
+
     return (
         <div className={'tree'}>
             <div className={'tree-one'}>MAIN APP</div>
 
-            <DATASubChild2_2.Provider value="Data For SubChild 2.2">
+            <DATA.Provider value={{someData, setSomeData}}>
                 <Child1 />
                 <Child2 />
-            </DATASubChild2_2.Provider>
+            </DATA.Provider>
         </div>
     );
 };
