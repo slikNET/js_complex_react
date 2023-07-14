@@ -3,47 +3,46 @@ import React, {useContext, useRef, useState} from 'react';
 import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button";
 
-import {UsersContext} from "../Users";
+import {CommentsContext} from "../Comments";
+import TextArea from "../../UI/TextArea/TextArea";
 
-const UserForm = () => {
-    console.log('render UserForm');
+const CommentForm = () => {
+    console.log('render CommentForm');
 
-    const [users, setUsers] = useContext(UsersContext);
+    const [comments, setComments] = useContext(CommentsContext);
     const formRef = {
         name: useRef(''),
-        username: useRef(''),
         email: useRef(''),
-        phone: useRef(''),
+        body: useRef(''),
     }
 
     const [saving, setSaving] = useState(false);
 
-    const createUser = () => {
+    const createComment = () => {
         setSaving(true);
 
-        fetch('https://jsonplaceholder.typicode.com/users', {
+        fetch('https://jsonplaceholder.typicode.com/comments', {
             method: 'POST',
             body: JSON.stringify({
+                postId: 1,
                 name: formRef.name.current.value,
-                username: formRef.username.current.value,
                 email: formRef.email.current.value,
-                phone: formRef.phone.current.value
+                body: formRef.body.current.value
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
             .then((res) => res.json())
-            .then((newUser) => {
+            .then((newComment) => {
                 //  RESET FORM
                 formRef.name.current.value = '';
-                formRef.username.current.value = '';
                 formRef.email.current.value = '';
-                formRef.phone.current.value = '';
+                formRef.body.current.value = '';
 
-                // NEW USER
-                const newUsers = [newUser, ...users];
-                setUsers(newUsers)
+                // NEW COMMENT
+                const newComments = [newComment, ...comments];
+                setComments(newComments)
             })
             .finally(() => {
                 setSaving(false);
@@ -53,7 +52,7 @@ const UserForm = () => {
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        createUser()
+        createComment()
     }
 
     const onInputChange = (e, name) => {
@@ -63,13 +62,12 @@ const UserForm = () => {
     return (
         <form className={'form'} action={'#'} onSubmit={onSubmitHandler}>
             <Input type={'text'} ref={formRef.name} name={'name'} onChange={(e)=>{onInputChange(e, 'name')}} placeholder={'Name'}/>
-            <Input type={'text'} ref={formRef.username} name={'username'} onChange={(e)=>{onInputChange(e, 'username')}} placeholder={'Username'}/>
             <Input type={'email'} ref={formRef.email} name={'email'} onChange={(e)=>{onInputChange(e, 'email')}} placeholder={'Email'}/>
-            <Input type={'tel'} ref={formRef.phone} name={'phone'} onChange={(e)=>{onInputChange(e, 'phone')}} placeholder={'Phone'}/>
+            <TextArea ref={formRef.body} name={'body'} onChange={(e)=>{onInputChange(e, 'body')}} placeholder={'Message'}/>
 
-            <Button type={'submit'} text={'Create New User'} disabled={saving}/>
+            <Button type={'submit'} text={'Add New Comment'} disabled={saving}/>
         </form>
     );
 };
 
-export default UserForm;
+export default CommentForm;

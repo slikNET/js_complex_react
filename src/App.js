@@ -1,12 +1,13 @@
 import React from 'react';
-import Users from "./components/Users/Users";
+
+import Comments from "./components/CommentsContainer/Comments";
 
 const App = () => {
     console.log('render App');
 
     return (
         <>
-            <Users/>
+            <Comments/>
         </>
     );
 };
