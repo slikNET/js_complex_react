@@ -10,7 +10,7 @@ const Users = () => {
     const [users, setUsers] = useState();
 
     useEffect(()=> {
-        apiService.getUsers(setUsers)
+        apiService.getUsers().then(users => setUsers(users))
     }, [])
 
     return (

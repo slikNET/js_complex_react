@@ -13,7 +13,12 @@ const UserForm = ({props}) => {
     const createUser = (user) => {
         setSaving(true);
 
-        apiService.createUser(user, users, setUsers, setSaving)
+        apiService.createUser(user).then((res) => {
+            const newUser = [res, ...users];
+            setUsers(newUser)
+        }).finally(() => {
+            setSaving(false)
+        })
 
         reset();
     }

@@ -13,7 +13,12 @@ const CommentForm = ({props}) => {
     const createComment = (comment) => {
         setSaving(true);
 
-        apiService.createComment(comment, comments, setComments, setSaving)
+        apiService.createComment(comment).then((res) => {
+            const newUser = [res, ...comments];
+            setComments(newUser)
+        }).finally(() => {
+            setSaving(false)
+        })
 
         reset();
     }

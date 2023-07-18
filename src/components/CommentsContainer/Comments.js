@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import CommentForm from "./CommentForm/CommentForm";
 import CommentItem from "./CommentItem/CommentItem";
@@ -10,7 +10,7 @@ const Comments = () => {
     const [comments, setComments] = useState();
 
     useEffect(()=> {
-        apiService.getComment(setComments)
+        apiService.getComment(setComments).then(comments => setComments(comments))
     }, [])
 
     return (

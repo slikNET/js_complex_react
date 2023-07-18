@@ -14,32 +14,22 @@ const Endpoints = {
 
 export const apiService = {
     //  USERS API
-    getUsers: (setUsers) => {
-        instance.get(Endpoints.users)
-            .then((res) => setUsers(res.data))
+    getUsers: () => {
+        return instance.get(Endpoints.users)
+            .then((res) => res.data)
     },
-    createUser: (user, users, setUsers, setSaving) => {
-        instance.post(Endpoints.users, user)
-            .then((res) => {
-                // NEW USER
-                const newUsers = [res.data, ...users];
-                setUsers(newUsers)
-            })
-            .finally(setSaving(false))
+    createUser: (user) => {
+        return instance.post(Endpoints.users, user)
+            .then((res) => res.data)
     },
 
     //  COMMENTS API
-    getComment: (setComments) => {
-        instance.get(Endpoints.comments)
-            .then((res) => setComments(res.data))
+    getComment: () => {
+        return instance.get(Endpoints.comments)
+            .then((res) => res.data)
     },
-    createComment: (comment, comments, setComments, setSaving) => {
-        instance.post(Endpoints.comments, comment)
-            .then((res) => {
-                // NEW COMMENT
-                const newComment = [res.data, ...comments];
-                setComments(newComment)
-            })
-            .finally(setSaving(false))
+    createComment: (comment) => {
+        return instance.post(Endpoints.comments, comment)
+            .then((res) =>  res.data)
     }
 }
